@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Blog - Home
+{% endblock title %}
+
+{% block content %}
+
+    {% if  category_posts and category%}
+        <h1>Category</h1>
+
+        <h3>{{ category|title }}</h3>
+
+        <ul>
+            {% for post in category_posts %}
+                <li>
+                    <h3>Post {{ post.pk }} Title - <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h3>
+                </li>
+                <p>Author - {{ post.author|title }}</p>
+                <p>Category - <a href="{% url 'category' post.category.pk %}">{{ post.category }}</a> -> PK is {{ post.category.pk }}</p>
+                <p>Content - {{ post.content|truncatechars:150 }}</p>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>{{ category|title }}</h3>
+    {% endif %}
+
+
+{% endblock content %}
+

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit Profile Page
+{% endblock title %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        {% if user.id == page_user.id %}
+            <h1>Edit Profile Page</h1>
+
+            <div class="form-group">
+                <form method="POST" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" is telling the form to accept file data -->
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                </form>
+            </div>
+        {% else %}
+            <h3>You can't edit this profile!</h3>
+        {% endif %}
+    {% else %}
+        <h3>Please login to edit profile!</h3>
+    {% endif %}
+
+    <br><br><br>
+    <a class="btn btn-dark" href="{% url 'blog-home' %}">Back to home</a>
+
+    <br><br><br>
+
+{% endblock content %}
+
+

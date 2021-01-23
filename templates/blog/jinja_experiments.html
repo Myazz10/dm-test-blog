@@ -1,0 +1,21 @@
+<h1>Blog Post</h1>
+
+<ul>
+    {% for post in posts%}
+        <li>
+            <h3>Post {{ post.pk }} Title - {{ post.title }}</h3>
+        </li>
+        <p>Author - {{ post.author }}</p>
+        <p>Author Firstname - {{ post.author.first_name }}</p>
+        <p>Author Lastname - {{ post.author.last_name }}</p>
+        <p>Author Email - {{ post.author.email }}</p>
+        <p>Author ID - {{ post.author.pk }}</p>
+        <p>Category - {{ post.category }}</p>
+        <p>Content - {{ post.content }}</p>
+        <p>Image - {#{ post.header_image.url }#}</p>
+        <p>User Bio - {#{ user.profile.bio }#}</p>
+        <p>Content (slice)- {{ post.content|slice:'3' }}</p>
+        <p>Content (truncatechars) - {{ post.content|truncatechars:5 }}</p>
+        <p>Content (with linebreaks) - {{ post.content|linebreaks }}</p>
+    {% endfor %}
+</ul>

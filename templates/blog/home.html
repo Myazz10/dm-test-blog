@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Blog - Home
+{% endblock title %}
+
+{% block content %}
+    <h1>Blog Post</h1>
+
+    <ul>
+        {% for post in posts%}
+            <li>
+                <h3>Post {{ post.pk }} Title - <a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></h3>
+            </li>
+            <p>Author - {{ post.author|title }}</p>
+            <p>Category - <a href="{% url 'category' post.category.pk %}">{{ post.category|title  }}</a> -> PK is {{ post.category.pk }}</p>
+            <!-- <p>Content - {#{ post.content|truncatechars:150 }#}</p> -->
+            <p>Snippet - {{ post.snippet }}</p>
+
+            {# pip install django-ckeditor -> RickTextField has enabled this! #}
+            <p>
+                {% with post=post.content|safe %}
+                    {{post|truncatechars:150 }}
+                {% endwith %}
+            </p>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
+
